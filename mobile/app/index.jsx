@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Image } from "expo-image";
+import { Link } from "expo-router";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Hi Ben the simulator is working! Nice 😀</Text>
-      <Image source={""} />
+      <Text style={styles.title}>Hello 😀</Text>
+      <Link href="/(auth)/signup">Signup </Link>
+      <Link href="/(auth)">Login </Link>
     </View>
   );
 }
@@ -16,5 +18,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  title: { color: "red" },
+  title: { color: "blue" },
 });
