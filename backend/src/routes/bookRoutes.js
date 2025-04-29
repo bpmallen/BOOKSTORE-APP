@@ -34,10 +34,10 @@ router.post("/", protectRoute, async (req, res) => {
   }
 });
 
-// const response = await fetch("http://localhost:3000/api/books?page=1&limit=5");
-
 // get books w/ pagination
 router.get("/", protectRoute, async (req, res) => {
+  // example call from react native frontend
+  // const response = await fetch("http://localhost:3000/api/books?page=1&limit=5");
   try {
     const page = parseInt(req.query.page, 10) || 1; // Use parseInt with base 10
     const limit = parseInt(req.query.limit, 10) || 5;
@@ -59,6 +59,34 @@ router.get("/", protectRoute, async (req, res) => {
     });
   } catch (error) {
     console.log("Error in get all books route", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.delete("/:id", protectRoute, async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+
+    // check that user is the creator of the book
+    if (book.user.toString() !== req.user._id.toString()) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    // https://res.cloudinary.com/dlysmvmvc/image/upload/v1745862635/u9qhyhgdu1cyuhyelb6e.jpg
+    // delete image from cloudinary database
+    if (book.image && book.image.includes("cloudinary")) {
+      try {
+        const publicId = book.image.split("/").pop().split(".")[0];
+        await cloudinary.uploader.destroy(publicId);
+      } catch (deleteError) {
+        console.log("Error deleting image from cloudinary", deleteError);
+      }
+    }
+
+    await book.deleteOne();
+    res.json({ message: "Book deleted succesfully" });
+  } catch (error) {
+    console.log("Error deleting book", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
