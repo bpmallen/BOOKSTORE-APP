@@ -63,6 +63,7 @@ router.get("/", protectRoute, async (req, res) => {
   }
 });
 
+// get books by logged in user
 router.get("/user", protectRoute, async (req, res) => {
   try {
     const books = await Book.find({ user: req.user._id }).sort({ createdAt: -1 });
