@@ -12,9 +12,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 job.start();
-console.log("Cron job started.");
+// console.log("Cron job started.");
 app.get("/", (req, res) => {
-  res.status(200).send("The cron job worked!");
+  res.status(200).json();
 });
 app.use(express.json());
 app.use(cors());

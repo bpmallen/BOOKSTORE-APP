@@ -5,8 +5,8 @@ import "dotenv/config";
 const job = new cron.CronJob("*/14 * * * *", function () {
   https
     .get(process.env.API_URL, (res) => {
-      console.log("Cron GET request status:", res.statusCode);
-      if (res.statusCode === 200) console.log("GET request sent successfully");
+      // console.log("Cron GET request status:", res.statusCode);
+      if (res.statusCode === 200) console.log(" cron.js GET request sent successfully");
       else console.log("GET request failed", res.statusCode);
     })
     .on("error", (e) => console.error("Error while sending request", e));
