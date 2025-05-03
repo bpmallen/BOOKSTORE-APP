@@ -9,7 +9,7 @@ export default function RootLayout() {
   const router = useRouter();
   const segments = useSegments();
 
-  console.log("segments", segments);
+  // console.log("segments", segments);
 
   const { checkAuth, user, token } = useAuthStore();
 

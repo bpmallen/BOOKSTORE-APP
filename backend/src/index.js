@@ -16,7 +16,7 @@ job.start();
 app.get("/", (req, res) => {
   res.status(200).json();
 });
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
