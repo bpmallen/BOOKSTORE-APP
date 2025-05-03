@@ -34,13 +34,13 @@ router.post("/", protectRoute, async (req, res) => {
   }
 });
 
-// get books w/ pagination
+// pagination => infinite loading
 router.get("/", protectRoute, async (req, res) => {
-  // example call from react native frontend
+  // example call from react native - frontend
   // const response = await fetch("http://localhost:3000/api/books?page=1&limit=5");
   try {
-    const page = parseInt(req.query.page, 10) || 1; // Use parseInt with base 10
-    const limit = parseInt(req.query.limit, 10) || 5;
+    const page = req.query.page || 1;
+    const limit = req.query.limit || 2;
     const skip = (page - 1) * limit;
 
     const books = await Book.find()
