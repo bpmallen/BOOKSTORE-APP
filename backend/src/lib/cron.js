@@ -1,18 +1,18 @@
-import cron from "cron";
-import https from "https";
-import "dotenv/config";
+// import cron from "cron";
+// import https from "https";
+// import "dotenv/config";
 
-const job = new cron.CronJob("*/14 * * * *", function () {
-  https
-    .get(process.env.API_URL, (res) => {
-      // console.log("Cron GET request status:", res.statusCode);
-      if (res.statusCode === 200) console.log(" cron.js GET request sent successfully");
-      else console.log("GET request failed", res.statusCode);
-    })
-    .on("error", (e) => console.error("Error while sending request", e));
-});
+// const job = new cron.CronJob("*/14 * * * *", function () {
+//   https
+//     .get(process.env.API_URL, (res) => {
+//       // console.log("Cron GET request status:", res.statusCode);
+//       if (res.statusCode === 200) console.log(" cron.js GET request sent successfully");
+//       else console.log("GET request failed", res.statusCode);
+//     })
+//     .on("error", (e) => console.error("Error while sending request", e));
+// });
 
-export default job;
+// export default job;
 
 // CRON JOB EXPLANATION:
 // Cron jobs are scheduled tasks that run periodically at fixed intervals
